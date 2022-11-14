@@ -5,7 +5,9 @@ const bcrypt = require('bcrypt-nodejs')
 const UserSchema = new Schema({ //Este objeto recibe los mismos atributos que tiene nuestra colección en la base de datos
     email: { type: String, unique: true, lowercase: true, required: true }, //Objeto de configuración de requerimientos de Mongoose
     password: { type: String, required: true },
-    regiterDate:{ type: Date, default: Date.now() }
+    regiterDate:{ type: Date, default: Date.now() },
+    products: [{ type: Schema.Types.ObjectId, ref: 'Product' }] //RELACIÓN ONE TO MANY
+
 });
 
 UserSchema.pre('save', function(next) { //meddleware de mongo. Ejecuta antes de grabar(pre-grabar)
